@@ -1,29 +1,42 @@
-#include <avr/interrupt.h>    // Defines pins, ports, etc to make programs easier to read
-#define F_CPU 1000000UL	      // Sets up the default speed for delay.h
+#include <avr/interrupt.h>	// Definicje nazw pinow układu
+
+#define F_CPU 1000000UL		// Zapisanie predkosci procesora w Hz dla biblioteki delay.h
 #include <util/delay.h>
 
-void blinkEm( uint8_t count);
 
-int main(){
-	
-	/* Initialize LED blinker (PD4)  */
-	DDRD = _BV(PD4);		      // enable output on port D, pin 4
+// Deklaracja funkcji mrugajacej dioda
+void blinkEm(uint8_t count);
+
+
+// Glowna funkcja programu
+int main()
+{
+  DDRD = _BV(PD4); // Ustawienie PORT D 4 (noga 8)jako wyjscie
   
-  while(1){
-			blinkEm(1);
-	}
+  while (1) // Petla, ktora nigdy sie nie konczy
+  {
+    blinkEm(1); // Wywolanie funkcji mrugajacej dioda
+  }
 }
-/*------------------------------------------------------------------------
-**  blinkEm - function to blink LED using PD4 for count passed in
-** ---------------------------------------------------------------------*/
-void blinkEm( uint8_t count){
-	while (count > 0){
-		PORTD = _BV(PD4); 
-		_delay_ms(1000);
 
-		PORTD = ~_BV(PD4);	
-		_delay_ms(1000);
-		count--;
 
-	}
+// Funkcja mrugajaca dioda LED ustalona ilosc razy
+void blinkEm(uint8_t count)
+{
+  // petla ilosci mrugniec
+  // dziala az zmienna count osiagnie wartosc 0
+  while (count > 0)
+  {
+    // Wlaczenie diody led
+    PORTD = _BV(PD4);
+    // oczekiwanie 1 s
+    _delay_ms(1000);
+
+    // wylaczenie diody led
+    PORTD = ~_BV(PD4);	
+    _delay_ms(1000);
+    
+    // odliczanie ilosci mrugniec
+    count--;
+  }
 }
