@@ -1,6 +1,6 @@
 #include <avr/interrupt.h>	// Definicje nazw pinow układu
 
-#define F_CPU 1000000UL		// Zapisanie predkosci procesora w Hz dla biblioteki delay.h
+#define F_CPU 8000000UL		// Zapisanie predkosci procesora w Hz dla biblioteki delay.h
 #include <util/delay.h>
 
 
